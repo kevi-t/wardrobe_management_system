@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\RegisterController;
 use App\Http\Controllers\API\LoginController;
+use App\Http\Controllers\API\ProductController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -15,4 +16,8 @@ Route::controller(RegisterController::class)->group(function(){
 
 Route::controller(LoginController::class)->group(function(){
     Route::post('login', 'login');
+});
+
+Route::middleware('auth:sanctum')->group( function () {
+    Route::resource('products', ProductController::class);
 });
